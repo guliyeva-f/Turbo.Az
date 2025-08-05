@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,39 +12,56 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="./src/style.css" rel="stylesheet">
 </head>
-<body>
+
+<body class="bg-[var(--bg-body)]">
     <header>
-        <nav class="container px-[80px] h-top h-[40px] flex justify-between m-auto bg-[#f6f7fa]">
-            <ul class="t-left flex items-center gap-[20px] text-[16px] text-[#666976] font-medium">
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Tap.az</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Bina.az</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Boss.az</a></li>
+        <nav class="container px-[80px] h-top h-[40px] flex justify-between m-auto bg-[var(--bg-main)]">
+            <ul class="t-left flex items-center gap-[20px] text-[16px] text-[var(--text-muted)] font-medium">
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Tap.az</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Bina.az</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Boss.az</a></li>
             </ul>
-            <ul class="t-right flex items-center gap-[30px] text-[16px] text-[#666976] font-medium">
-                <li>Dəstək: <span class="hover:text-[#ca1016] cursor-pointer">(012) 526-47-47</span></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Yardım</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">RU</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer flex gap-1.5 items-center"><i
-                        class="fa-solid fa-heart"></i><a href="#">Seçilmişlər</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer flex gap-1.5 items-center"><i
+            <ul class="t-right flex items-center gap-[30px] text-[16px] text-[var(--text-muted)] font-medium">
+                <li>Dəstək: <span class="hover:text-[var(--accent)] cursor-pointer">(012) 526-47-47</span></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Yardım</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">RU</a></li>
+                <li id="favorites-link" class="hover:text-[var(--accent)] cursor-pointer flex gap-1.5 items-center"
+                    onclick="showFavorites()">
+                    <i class="fa-solid fa-heart"></i>
+                    <a href="#">Seçilmişlər</a>
+                </li>
+                <li class="hover:text-[var(--accent)] cursor-pointer flex gap-1.5 items-center"><i
                         class="fa-solid fa-user"></i><a href="#">Giriş</a></li>
             </ul>
         </nav>
-        <div class="h-bottom bg-[#ca1016] h-[60px]">
-            <nav class="container px-[80px] m-auto text-[#fff] h-full flex justify-between">
+        <div class="h-bottom bg-[var(--accent)] h-[60px]">
+            <nav class="container px-[80px] m-auto text-[var(--text-light)] h-full flex justify-between">
                 <div class="flex gap-[50px] h-full items-center">
-                    <div id="logo" class="text-[20px] font-bold transition-all duration-300 hover:scale-120 cursor-pointer">TURBO.AZ</div>
+                    <div id="logo"
+                        class="text-[20px] font-bold transition-all duration-300 hover:scale-120 cursor-pointer"
+                        onclick="showAllCars()">
+                        TURBO.AZ
+                    </div>
                     <ul class="flex gap-[20px]">
-                        <li class="hover:text-[#f5cecd] cursor-pointer text-[#fff]"><a href="#">Bütün elanlar</a></li>
-                        <li class="hover:text-[#f5cecd] cursor-pointer text-[#fff]"><a href="#">Dilerlər</a></li>
-                        <li class="hover:text-[#f5cecd] cursor-pointer text-[#fff]"><a href="#">Avtokataloq</a></li>
-                        <li class="hover:text-[#f5cecd] cursor-pointer text-[#fff]"><a href="#">Moto</a></li>
-                        <li class="hover:text-[#f5cecd] cursor-pointer text-[#fff]"><a href="#">Ehtiyat hissələr və
+                        <li class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)]"><a
+                                href="#">Bütün elanlar</a></li>
+                        <li class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)]"><a
+                                href="#">Dilerlər</a></li>
+                        <li class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)]"><a
+                                href="#">Avtokataloq</a></li>
+                        <li class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)]"><a
+                                href="#">Moto</a></li>
+                        <li class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)]"><a
+                                href="#">Ehtiyat hissələr və
                                 aksesuarlar</a></li>
-                        <li class="hover:text-[#f5cecd] cursor-pointer text-[#fff]"><a href="#">İcarə</a></li>
+                        <li class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)]"><a
+                                href="#">İcarə</a></li>
                     </ul>
                 </div>
-                <div class="button h-full flex items-center">
+                <div class="button h-full flex items-center gap-2.5">
+                    <button id="theme-toggle" class="ml-4 text-xl cursor-pointer">
+                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    </button>
                     <a href="#"
                         class="bg-[#7ed321] rounded-[8px] transition-all duration-300 hover:bg-[#6ac11e] p-[10px_15px] text-[15px] font-medium text-[white] flex gap-[10px] items-center"><i
                             class="fa-solid fa-plus"></i><span class="font-bold">Yeni Elan</span></a>
@@ -52,27 +70,27 @@
         </div>
     </header>
     <main>
-        <section id="filters" class="bg-[#ebedf3]">
+        <section id="filters" class="bg-[var(--bg-filters)]">
             <form class="container mx-auto p-[30px_80px] flex flex-col gap-[30px]">
                 <div class=" flex flex-wrap gap-[10px]">
                     <select onchange="applyFilters()" id="brand" name="brand"
-                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-white outline-none p-[15px_10px]">
+                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-[var(--bg-inp)] outline-none p-[15px_10px]">
                         <!-- jsle gelecek -->
                     </select>
                     <select onchange="applyFilters()" id="model" name="model"
-                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-white outline-none p-[15px_10px]">
+                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-[var(--bg-inp)] outline-none p-[15px_10px]">
                         <!-- jsle gelecek -->
                     </select>
                     <select onchange="applyFilters()" id="banType" name="banType"
-                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-white outline-none p-[15px_10px]">
+                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-[var(--bg-inp)] outline-none p-[15px_10px]">
                         <!-- jsle gelecek -->
                     </select>
                     <select onchange="applyFilters()" id="city" name="city"
-                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-white outline-none p-[15px_10px]">
+                        class="w-[calc((100%-40px)/5)] rounded-[12px] border-gray-300 bg-[var(--bg-inp)] outline-none p-[15px_10px]">
                         <!-- jsle gelecek -->
                     </select>
                     <select onchange="applyFilters()" id="currency" name="currency"
-                        class="w-[calc((100%-40px)/5)] rounded-[8px] border-gray-300 bg-white outline-none p-[15px_10px]">
+                        class="w-[calc((100%-40px)/5)] rounded-[8px] border-gray-300 bg-[var(--bg-inp)] outline-none p-[15px_10px]">
                         <!-- jsle gelecek -->
                         <option value="">Valyuta</option>
                     </select>
@@ -81,43 +99,44 @@
                     <div class="flex gap-[10px]">
                         <div class="flex w-[calc((100%-20px)/3)] justify-between gap-[5px]">
                             <input type="number" name="odometerMin" placeholder="Yürüş (km), Min."
-                                class="bg-white rounded-[8px] border-gray-300 outline-none p-[10px] w-[65%]">
+                                class="bg-[var(--bg-inp)] rounded-[8px] border-gray-300 outline-none p-[10px] w-[65%]">
                             <input type="number" name="odometerMax" placeholder="Max."
-                                class="bg-white rounded-[8px] border-gray-300 outline-none p-[10px] w-[35%]">
+                                class="bg-[var(--bg-inp)] rounded-[8px] border-gray-300 outline-none p-[10px] w-[35%]">
                         </div>
                         <div class="flex w-[calc((100%-20px)/3)] justify-between gap-[5px]">
                             <input type="number" name="priceMin" placeholder="Qiymət, Min."
-                                class="bg-white rounded-[8px] border-gray-300 outline-none p-[10px] w-[60%]">
+                                class="bg-[var(--bg-inp)] rounded-[8px] border-gray-300 outline-none p-[10px] w-[60%]">
                             <input type="number" name="priceMax" placeholder="Max."
-                                class="bg-white rounded-[8px] border-gray-300 outline-none p-[10px] w-[40%]">
+                                class="bg-[var(--bg-inp)] rounded-[8px] border-gray-300 outline-none p-[10px] w-[40%]">
                         </div>
                         <div class="flex w-[calc((100%-20px)/3)] justify-between gap-[5px]">
                             <input type="number" name="yearMin" placeholder="İl, Min."
-                                class="bg-white rounded-[8px] border-gray-300 outline-none p-[10px] w-[60%]">
+                                class="bg-[var(--bg-inp)] rounded-[8px] border-gray-300 outline-none p-[10px] w-[60%]">
                             <input type="number" name="yearMax" placeholder="Max."
-                                class="bg-white rounded-[8px] border-gray-300 outline-none p-[10px] w-[40%]">
+                                class="bg-[var(--bg-inp)] rounded-[8px] border-gray-300 outline-none p-[10px] w-[40%]">
                         </div>
                     </div>
                     <div class="flex gap-[5px]">
                         <div id="credit"
-                            class="cursor-pointer rounded-[8px] bg-gray-100 text-gray-700 border w-full px-[10px] flex items-center"
+                            class="cursor-pointer rounded-[8px] bg-[var(--bg-inp)] text-gray-700 border w-full px-[10px] flex items-center"
                             onclick="toggleSelect('credit')"> Kredit
                         </div>
                         <div id="barter"
-                            class="cursor-pointer rounded-[8px] bg-gray-100 text-gray-700 border w-full px-[10px] flex items-center"
+                            class="cursor-pointer rounded-[8px] bg-[var(--bg-inp)] text-gray-700 border w-full px-[10px] flex items-center"
                             onclick="toggleSelect('barter')"> Barter
                         </div>
                     </div>
                 </div>
             </form>
         </section>
-        <section id="car-section" class="m-auto bg-[#f6f7fa]">
-            <div id="section-title" class="bg-[#f1f3f7] h-[60px] flex items-center">
+        <section id="car-section" class="m-auto bg-[var(--bg-main)]">
+            <div id="section-title" class="bg-[var(--bg-secondary)] h-[60px] flex items-center">
                 <span
-                    class="container px-[80px] m-auto flex justify-between items-center text-[18px] font-bold text-[#212c3a]">Premium
+                    class="container px-[80px] m-auto flex justify-between items-center text-[18px] font-bold text-[var(--text-main)]">Premium
                     Elanlar<a href="#" onclick="resetFilters()"
-                        class="rounded-[8px] outline-1 p-[10px_15px] text-[16px] font-normal text-[#212c3a] flex gap-[10px] items-center"><i
-                            class="fa-solid fa-broom"></i>Filtrləri sıfırla</a></span></div>
+                        class="rounded-[8px] outline-1 p-[10px_15px] text-[16px] font-normal text-[var(--text-main)] flex gap-[10px] items-center"><i
+                            class="fa-solid fa-broom"></i>Filtrləri sıfırla</a></span>
+            </div>
             <div id="cars-container"
                 class="container px-[80px] mt-10 mb-16 flex gap-[30px] items-start flex-wrap m-auto">
                 <!-- jsle gelecek -->
@@ -125,27 +144,33 @@
         </section>
     </main>
     <footer>
-        <nav class="container px-[80px] h-top h-[60px] flex m-auto bg-[#f6f7fa]">
-            <ul class="t-left flex items-center gap-[40px] text-[16px] text-[#666976] font-medium">
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Qaydalar</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Qanun</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">İstifadəçi razılaşması</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Məxfilik siyasəti</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Sifarişli avtomobil alan alıcı üçün tövsiyələr</a></li>
-                <li class="hover:text-[#ca1016] cursor-pointer"><a href="#">Reklam yerləşdirin</a></li>
+        <nav class="container px-[80px] h-top h-[60px] flex m-auto bg-[var(--bg-main)]">
+            <ul class="t-left flex items-center gap-[40px] text-[16px] text-[var(--text-muted)] font-medium">
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Qaydalar</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Qanun</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">İstifadəçi razılaşması</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Məxfilik siyasəti</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Sifarişli avtomobil alan alıcı üçün
+                        tövsiyələr</a></li>
+                <li class="hover:text-[var(--accent)] cursor-pointer"><a href="#">Reklam yerləşdirin</a></li>
             </ul>
         </nav>
-        <div class="h-bottom bg-[#ca1016] h-[60px]">
+        <div class="h-bottom bg-[var(--accent)] h-[60px]">
             <div class="container px-[80px] m-auto h-full flex justify-between items-center">
-                <p class="hover:text-[#f5cecd] cursor-pointer text-[#fff] text-[14px]">Saytın Administrasiyası reklam bannerlərinin və yerləşdirilmiş <br> elanların məzmununa görə məsuliyyət daşımır.</p>
+                <p class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)] text-[14px]">Saytın
+                    Administrasiyası reklam
+                    bannerlərinin və yerləşdirilmiş <br> elanların məzmununa görə məsuliyyət daşımır.</p>
                 <div class="flex gap-[40px] items-center">
-                    <p class="hover:text-[#f5cecd] cursor-pointer text-[#fff] text-[12px]">2006-2025 Digital Classifieds MMC. VÖEN: 1405631661</p>
-                    <a class="hover:text-[#f5cecd] cursor-pointer text-[#fff] text-[14px] text-center" href="#">Mobil versiyası <br> (yoxdur 😄)</a>
+                    <p class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)] text-[12px]">
+                        2006-2025 Digital Classifieds
+                        MMC. VÖEN: 1405631661</p>
+                    <a class="hover:text-[var(--accent-hover)] cursor-pointer text-[var(--text-light)] text-[14px] text-center"
+                        href="#">Mobil
+                        versiyası <br> (yoxdur 😄)</a>
                 </div>
             </div>
         </div>
     </footer>
-
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>

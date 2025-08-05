@@ -13,3 +13,33 @@
         color: white;
         font-size: 12px;
     }
+
+    :root {
+        --bg-body: #fff;
+        --bg-main: #f6f7fa;
+        --bg-secondary: #f1f3f7;
+        --bg-filters: #ebedf3;
+        --text-main: #212c3a;
+        --text-muted: #666976;
+        --text-light: #fff;
+        --accent: #ca1016;
+        --accent-hover: #f5cecd;
+        --bg-inp: #fff;
+        --bg-card: #fff;
+        --text-card: #212c3a;
+        --text-secondary: #8d94ad;
+    }
+
+    .dark {
+        --bg-body: #161616;
+        --bg-main: #1e1e1e;
+        --bg-secondary: #2a2a2a;
+        --bg-filters: #2f2f2f;
+        --text-main: #f5f5f5;
+        --text-muted: #b0b3b8;
+        --text-light: #e0e0e0;
+        --bg-inp: #ccc;
+        --bg-card: #222;
+        --text-card: #f1f1f1;
+        --text-secondary: #b0b3b8;
+    }
