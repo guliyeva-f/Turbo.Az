@@ -11,6 +11,12 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="./src/style.css" rel="stylesheet">
+    <script>
+        const theme = localStorage.getItem('theme');
+        if (theme === 'dark') {
+            document.documentElement.classList.add('dark');
+        }
+    </script>
 </head>
 
 <body class="bg-[var(--bg-body)]">
@@ -59,12 +65,111 @@
                     </ul>
                 </div>
                 <div class="button h-full flex items-center gap-2.5">
-                    <button id="theme-toggle" class="ml-4 text-xl cursor-pointer">
-                        <i id="theme-icon" class="fa-solid fa-moon"></i>
+                    <div id="themeToggle" class="ml-4 text-xl cursor-pointer">
+                    </div>
+                    <button id="openModalBtn"
+                        class="bg-[#7ed321] cursor-pointer rounded-[8px] transition-all duration-300 hover:bg-[#6ac11e] p-[10px_15px] text-[15px] font-medium text-white flex gap-[10px] items-center">
+                        <i class="fa-solid fa-plus"></i>
+                        <span class="font-bold">Yeni Elan</span>
                     </button>
-                    <a href="#"
-                        class="bg-[#7ed321] rounded-[8px] transition-all duration-300 hover:bg-[#6ac11e] p-[10px_15px] text-[15px] font-medium text-[white] flex gap-[10px] items-center"><i
-                            class="fa-solid fa-plus"></i><span class="font-bold">Yeni Elan</span></a>
+                    <div id="modal" class="fixed inset-0 bg-[#00000080] flex justify-center items-center z-50 hidden">
+                        <div
+                            class="modal-content bg-[var(--bg-main)] text-[var(--text-main)] rounded-[12px] shadow-lg w-full max-w-[700px] p-6 relative">
+                            <button id="closeModalBtn"
+                                class="absolute top-3 right-4 text-[var(--text-muted)] text-4xl hover:text-[var(--accent)] cursor-pointer">&times;</button>
+                            <h2 class="text-[22px] font-bold mb-4 border-b-2 border-[var(--accent)] pb-2">Yeni Elan
+                                Əlavə Et</h2>
+                            <form id="addForm" class="grid grid-cols-2 gap-4">
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="brand-modal">Marka</label>
+                                    <select id="brand-modal" name="brand"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]"></select>
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="model-modal">Model</label>
+                                    <input id="model-modal" type="text" name="model"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="banType-modal">Ban Tipi</label>
+                                    <select id="banType-modal" name="banType"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]"></select>
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="city-modal">Şəhər</label>
+                                    <input id="city-modal" type="text" name="city"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="odometer-modal">Yürüş</label>
+                                    <input id="odometer-modal" type="number" name="odometer"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="odometerUnit-modal">Ölçü
+                                        Vahidi</label>
+                                    <select id="odometerUnit-modal" name="odometerUnit"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]">
+                                        <option value="km">km</option>
+                                        <option value="mi">mil</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="price-modal">Qiymət</label>
+                                    <input id="price-modal" type="number" name="price"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="currency-modal">Valyuta</label>
+                                    <select id="currency-modal" name="currency"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]">
+                                        <option value="AZN">AZN</option>
+                                        <option value="USD">USD</option>
+                                        <option value="EUR">EUR</option>
+                                    </select>
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="year-modal">İl</label>
+                                    <input id="year-modal" type="number" name="year"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1" for="engine-modal">Mühərrik</label>
+                                    <input id="engine-modal" type="text" name="engine"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-2">
+                                    <label class="block text-sm font-medium mb-1" for="image-modal">Şəkil Linki</label>
+                                    <input id="image-modal" type="text" name="image"
+                                        class="w-full bg-[var(--bg-filters)] border rounded-[8px] p-2 outline-none focus:border-[var(--accent)]" />
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1">Kredit</label>
+                                    <div class="flex gap-4 mt-1">
+                                        <label class="flex items-center gap-1"><input type="radio" name="credit"
+                                                value="true" /> Bəli</label>
+                                        <label class="flex items-center gap-1"><input type="radio" name="credit"
+                                                value="false" /> Xeyr</label>
+                                    </div>
+                                </div>
+                                <div class="col-span-1">
+                                    <label class="block text-sm font-medium mb-1">Barter</label>
+                                    <div class="flex gap-4 mt-1">
+                                        <label class="flex items-center gap-1"><input type="radio" name="barter"
+                                                value="true" /> Bəli</label>
+                                        <label class="flex items-center gap-1"><input type="radio" name="barter"
+                                                value="false" /> Xeyr</label>
+                                    </div>
+                                </div>
+                                <div class="col-span-2 flex justify-end pt-2">
+                                    <button type="submit"
+                                        class="cursor-pointer bg-[var(--accent)] hover:bg-[var(--accent-hover)] text-white px-5 py-2 rounded-[8px] font-medium transition-all">
+                                        Elanı Əlavə Et
+                                    </button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
                 </div>
             </nav>
         </div>
@@ -174,4 +279,5 @@
     <script src="./assets/js/data.js"></script>
     <script src="./assets/js/script.js"></script>
 </body>
+
 </html>

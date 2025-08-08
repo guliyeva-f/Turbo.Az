@@ -206,30 +206,144 @@ function showAllCars() {
     renderCars(data);
 }
 
-function loadTheme() {
-    const theme = localStorage.getItem("theme") || "light";
-    document.documentElement.classList.toggle("dark", theme === "dark");
-    const icon = document.getElementById("theme-icon");
-    if (theme === "dark") {
-        icon.classList.remove("fa-moon");
-        icon.classList.add("fa-sun");
+function handleThemeWithLocal() {
+    const themeToggle = document.getElementById('themeToggle');
+    const themeLocal = localStorage.getItem('theme');
+
+    if (themeLocal == 'dark') {
+        document.documentElement.classList.add('dark');
+        themeToggle.innerHTML = `<i onclick="handleTheme('light')" class="fa-solid fa-moon"></i>`;
     } else {
-        icon.classList.remove("fa-sun");
-        icon.classList.add("fa-moon");
+        document.documentElement.classList.remove('dark');
+        themeToggle.innerHTML = `<i onclick="handleTheme('dark')" class="fa-solid fa-sun"></i>`;
     }
 }
 
-function toggleTheme() {
-    const isDark = document.documentElement.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
-    const icon = document.getElementById("theme-icon");
-    if (isDark) {
-        icon.classList.remove("fa-moon");
-        icon.classList.add("fa-sun");
-    } else {
-        icon.classList.remove("fa-sun");
-        icon.classList.add("fa-moon");
-    }
+function handleTheme(theme) {
+    localStorage.setItem('theme', theme);
+    handleThemeWithLocal();
 }
-document.getElementById("theme-toggle").addEventListener("click", toggleTheme);
-loadTheme();
+handleThemeWithLocal();
+
+const modal = document.getElementById('modal');
+const modalContent = modal.querySelector('.modal-content');
+const openModalBtn = document.getElementById('openModalBtn');
+const closeModalBtn = document.getElementById('closeModalBtn');
+const form = document.getElementById('addForm');
+
+openModalBtn.onclick = function () {
+    populateSelectOptions();
+    modal.classList.remove('hidden');
+};
+closeModalBtn.onclick = function () {
+    modal.classList.add('hidden');
+};
+modal.onclick = function () {
+    modal.classList.add('hidden');
+};
+modalContent.onclick = function (e) {
+    e.stopPropagation();
+};
+
+function populateSelectOptions() {
+    const brands = [...new Set(data.map(item => item.brand))];
+    const banTypes = [...new Set(data.map(item => item.banType))];
+    const brandSelect = document.getElementById('brand-modal');
+    const banTypeSelect = document.getElementById('banType-modal');
+    brandSelect.innerHTML = `<option value="" disabled selected>Marka seç</option>` +
+        brands.map(b => `<option value="${b}">${b}</option>`).join("");
+    banTypeSelect.innerHTML = `<option value="" disabled selected>Ban tipi seç</option>` +
+        banTypes.map(bt => `<option value="${bt}">${bt}</option>`).join("");
+}
+
+form.onsubmit = function (e) {
+    e.preventDefault();
+    const f = form.elements;
+
+    if (!f['brand'].value.trim()) {
+        alert("Marka seçməmisən");
+        return;
+    }
+    if (!f['model'].value.trim()) {
+        alert("Model yaz");
+        return;
+    }
+    if (!f['banType'].value.trim()) {
+        alert("Ban növü seçməmisən");
+        return;
+    }
+    if (!f['odometer'].value.trim()) {
+        alert("Yürüş yaz");
+        return;
+    }
+    if (!f['odometerUnit'].value.trim()) {
+        alert("Yürüş vahidi seçməmisən");
+        return;
+    }
+    if (!f['price'].value.trim()) {
+        alert("Qiymət yaz");
+        return;
+    }
+    if (!f['currency'].value.trim()) {
+        alert("Valyuta seçməmisən");
+        return;
+    }
+    if (!f['year'].value.trim()) {
+        alert("İl yaz");
+        return;
+    }
+    if (!form.querySelector('input[name="credit"]:checked')) {
+        alert("Kredit seçməmisən");
+        return;
+    }
+    if (!form.querySelector('input[name="barter"]:checked')) {
+        alert("Barter seçməmisən");
+        return;
+    }
+    if (!f['image'].value.trim()) {
+        alert("Şəkil linki yaz");
+        return;
+    }
+    if (!f['city'].value.trim()) {
+        alert("Şəhər yaz");
+        return;
+    }
+    if (!f['engine'].value.trim()) {
+        alert("Mühərrik yaz");
+        return;
+    }
+
+    const newItem = {
+        id: (data.length + 1).toString(),
+        brand: f['brand'].value,
+        model: f['model'].value,
+        banType: f['banType'].value,
+        odometer: Number(f['odometer'].value),
+        odometerUnit: f['odometerUnit'].value,
+        price: Number(f['price'].value),
+        currency: f['currency'].value,
+        year: f['year'].value,
+        credit: f['credit'].value === "true",
+        barter: f['barter'].value === "true",
+        images: [f['image'].value],
+        city: f['city'].value,
+        engine: parseFloat(f['engine'].value),
+        createdTime: new Date().toTimeString().slice(0, 5)
+    };
+    data.unshift(newItem);
+
+    let addedCars = JSON.parse(localStorage.getItem("addedCars")) || [];
+    addedCars.push(newItem);
+    localStorage.setItem("addedCars", JSON.stringify(addedCars));
+
+    renderCars(data);
+    modal.classList.add('hidden');
+    form.reset();   
+};
+
+const addedCarsJSON = localStorage.getItem("addedCars");
+if (addedCarsJSON) {
+    const addedCars = JSON.parse(addedCarsJSON);
+    data.unshift(...addedCars);
+}
+renderCars(data);
